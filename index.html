@@ -1,0 +1,67 @@
+<html>
+<head>
+    <link rel="stylesheet" href="./style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <title>楽天モバイル在庫チェックシステム</title>
+    <script type="text/javascript" src="./eel.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h2 class="mt-4 mb-4 fs-1 fst-italic text-decoration-underline text-center">
+            楽天モバイル在庫チェックシステム
+        </h2>
+    </div>
+    <div class="input_parameter">
+    <table class="table table-striped table-hover align-middle">
+        <thead>
+            <tr>
+                <th scope="col"> 項目</th>
+                <th scope="col">ステータス</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>チェック状況</th>
+                <td>
+                    <div>
+                        <input id="status_area" type="text" class="form-control" placeholder="STARTボタンを押すと処理が開始します">
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="d-grid gap-2 col-4 mx-auto">    
+        <button type="button" id="start_trigger" class="trigger btn-success btn-lg">START</button>
+        <button type="button" id="stop_trigger" class="trigger btn-danger btn-lg">STOP</button>
+    </div>
+        <h3 class="mt-4 mb-4 text-center">
+            ↓チェック時間と結果を表示↓
+        </h3>
+    <div class="form-floating mt-4">
+        <textarea id="result" class="log-view-area form-control" placeholder="Leave a comment here" 
+        id="floatingTextarea" style="height: 500px"></textarea>
+    </div>
+
+    <script>
+        start_trigger.addEventListener('click', () => {
+            eel.loop_start()
+            })
+
+        stop_trigger.addEventListener('click', () => {
+            eel.loop_stop()
+            })
+
+        eel.expose(view_status)
+        function view_status(text){
+            status_area.value = text
+        }
+
+        eel.expose(view_log_js)
+        function view_log_js(text){
+            result.value += text + "\n"
+        }
+    </script>
+</body>
+</html>
